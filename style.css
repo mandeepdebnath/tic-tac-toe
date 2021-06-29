@@ -1,0 +1,205 @@
+*{
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+
+:root{
+    --cell-size: 100px;
+    --mark-size: calc((var(--cell-size)* 0.5));
+}
+
+body{
+    font-family: 'Poppins', sans-serif;
+    height: 100vh;
+    position: relative;
+    background-color: rgb(71, 153, 242);
+    color: #fff;
+}
+
+button{
+    outline: none;
+    border: none;
+    background-color: rgb(71, 153, 242);
+    color: #fff;
+    padding: 10px;
+    border-radius: 3px;
+    font-size: 1.5rem;
+    transition: all 0.5s ease;
+    cursor: pointer;
+}
+button:hover{
+    transform: scale(0.95);
+}
+
+.game-board{
+    display: flex;
+    gap: 10px;
+    flex-direction: column;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.turn{
+    background-color: rgb(71, 153, 242);
+    color: #fff;
+    padding: 10px;
+    border-radius: 3px;
+    font-size: 1rem;
+    transition: all 0.5s ease;
+}
+
+.board{
+    height: 300px;
+    width: 300px;
+    display: grid;
+    grid-template-columns: repeat(3, auto);
+    justify-content: center;
+    align-content: center;
+    justify-items: center;
+    align-items: center;
+    opacity: 1;
+}
+.board .cell{
+    height: 100px;
+    width: 100px;
+    background-color: #fff;
+    border-radius: 7px;
+    border: 3px solid rgb(71, 153, 242);
+    transition: all 0.5s ease;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    cursor: pointer;
+}
+.cell.x,
+.cell.circle{
+    cursor: not-allowed;
+}
+
+.board .cell:hover{
+    transform: scale(0.95);
+}
+.board .cell:nth-child(1),
+.board .cell:nth-child(2),
+.board .cell:nth-child(3){
+    border-top: none;
+}
+.board .cell:nth-child(1),
+.board .cell:nth-child(4),
+.board .cell:nth-child(7){
+    border-left: none;
+}
+.board .cell:nth-child(3),
+.board .cell:nth-child(6),
+.board .cell:nth-child(9){
+    border-right: none;
+}
+.board .cell:nth-child(7),
+.board .cell:nth-child(8),
+.board .cell:nth-child(9){
+    border-bottom: none;
+}
+
+
+/* cross and circle signs */
+.cell.x::before,
+.cell.x::after,
+.cell.circle::before{
+    background-color: rgb(71, 153, 242);
+}
+
+
+.cell.x::before,
+.cell.x::after,
+.board.x .cell:not(.x):not(.circle):hover::before,
+.board.x .cell:not(.x):not(.circle):hover::after{
+    content: '';
+    width: calc(var(--mark-size) * 0.1);
+    height: var(--mark-size);
+    position: absolute;
+    border-radius: 50px;
+}
+.cell.x::before,
+.board.x .cell:not(.x):not(.circle):hover::before{
+    transform: rotate(45deg);
+}
+
+.cell.x::after,
+.board.x .cell:not(.x):not(.circle):hover::after{
+    transform: rotate(-45deg);
+}
+
+.cell.circle::before,
+.cell.circle::after,
+.board.circle .cell:not(.x):not(.circle):hover::before,
+.board.circle .cell:not(.x):not(.circle):hover::after{
+    content: '';
+    position: absolute;
+    border-radius: 50px;
+}
+.cell.circle::before,
+.board.circle .cell:not(.x):not(.circle):hover::before{
+    width: var(--mark-size);
+    height: var(--mark-size);
+}
+.cell.circle::after,
+.board.circle .cell:not(.x):not(.circle):hover::after{
+    width: calc(var(--mark-size) * 0.8);
+    height: calc(var(--mark-size) * 0.8);
+    background-color: #fff;
+}
+
+/* hover effect */
+.board.x .cell:not(.x):not(.circle):hover::before,
+.board.x .cell:not(.x):not(.circle):hover::after,
+.board.circle .cell:not(.x):not(.circle):hover::before{
+    background-color: rgb(173, 205, 238);
+}
+
+
+.result-screen{
+    font-size: 4em;
+    flex-direction: column;
+    gap: 10px;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 100%;
+    padding: 20px;
+    background-color: rgba(255, 255, 255, 0.8);
+    color: rgb(71, 153, 242);
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    font-weight: 700;
+    transform: translate(-50%, -50%);
+    border-radius: 5px;
+    display: none;
+}
+
+#heading{
+    font-size: 2.5em;
+    text-align: center;
+    border-bottom: 2px solid #fff;
+}
+
+.show{
+  display: flex;
+}
+.start-screen{
+    display: none;
+}
+hr{
+    width: 90%;
+}
+.copyright{
+    text-align: center;
+    font-size: 1em;
+    letter-spacing: 0.5em;
+    font-family: 'Courier New', Courier, monospace;
+    opacity: 0.7;
+}
